@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-@TeleOp(name= "Test teleop", group = "test")
+@TeleOp(name= "Lillian testing", group = "test")
 public class Test extends LinearOpMode {
     DcMotor l;//left drive
     DcMotor r;//right drive
@@ -41,3 +41,5 @@ public class Test extends LinearOpMode {
         }
     }
 }
+
+
