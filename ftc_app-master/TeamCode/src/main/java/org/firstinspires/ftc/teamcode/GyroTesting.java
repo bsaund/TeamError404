@@ -46,10 +46,16 @@ public class GyroTesting extends LinearOpMode {
 
         l.setPower(0);
         r.setPower(0);
-
-
+    }
+    // t is time
+    public void goForward(double t) {
+        l.setPower(1);
+        r.setPower(-1);//right motor reversed
 
     }
+
+
+
 
     @Override
     public void runOpMode() {
