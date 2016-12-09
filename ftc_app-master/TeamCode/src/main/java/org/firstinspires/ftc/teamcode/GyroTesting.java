@@ -8,6 +8,7 @@ package org.firstinspires.ftc.teamcode;
         import com.qualcomm.robotcore.eventloop.opmode.Disabled;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+        import com.qualcomm.robotcore.hardware.DcMotor;
         import com.qualcomm.robotcore.hardware.GyroSensor;
 
 /*
@@ -23,10 +24,12 @@ package org.firstinspires.ftc.teamcode;
 */
 @TeleOp(name = "Sensor: MR Gyro", group = "Sensor")
 public class GyroTesting extends LinearOpMode {
-
+    DcMotor l;//left drive
+    DcMotor r;//right drive
     @Override
     public void runOpMode() {
-
+        l = hardwareMap.dcMotor.get("l");//setup LOL
+        r = hardwareMap.dcMotor.get("r");// Same LOL
         ModernRoboticsI2cGyro gyro;   // Hardware Device Object
         int xVal, yVal, zVal = 0;     // Gyro rate Values
         int heading = 0;              // Gyro integrated heading
@@ -81,6 +84,14 @@ public class GyroTesting extends LinearOpMode {
             telemetry.addData("3", "Y av. %03d", yVal);
             telemetry.addData("4", "Z av. %03d", zVal);
             telemetry.update();
+            if (angleZ < 90){
+                l.setPower(1);
+                r.setPower(1);
+            }
+            else {
+                l.setPower(0);
+                r.setPower(0);
+            }
         }
     }
 }
