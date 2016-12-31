@@ -5,6 +5,7 @@ package org.firstinspires.ftc.teamcode;
  */
 
         import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+        import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.eventloop.opmode.Disabled;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -22,7 +23,8 @@ package org.firstinspires.ftc.teamcode;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
 */
-@TeleOp(name = "Sensor: MR Gyro", group = "Sensor")
+@Disabled
+@Autonomous(name = "Sensor: MR Gyro", group = "Sensor")
 public class GyroTesting extends LinearOpMode {
     DcMotor l;//left drive
     DcMotor r;//right drive
@@ -47,10 +49,18 @@ public class GyroTesting extends LinearOpMode {
         l.setPower(0);
         r.setPower(0);
     }
-    // t is time
+    // t is time robot goes for (for example if you make the robot go forward for 3 sec, turn 45 degrees, then go forward for 4 seconds the t variables would be 3 the first time and 4 the second time.
     public void goForward(double t) {
-        l.setPower(1);
-        r.setPower(-1);//right motor reversed
+        double tZero;
+        tZero = getRuntime();//sets tZero as the time the function is called, so it can be seen as the inital time
+        while (getRuntime() - tZero < t) { //time- tZero means time the function has been running, so this means that while the time the function has been running is less than the desired time for the function to run, the robot will go forward.
+            l.setPower(1);
+            r.setPower(-1);//right motor reversed
+
+        }
+        l.setPower(0);
+        r.setPower(0);
+
 
     }
 
@@ -87,6 +97,10 @@ public class GyroTesting extends LinearOpMode {
         // wait for the start button to be pressed.
         waitForStart();
 
+        goForward(2); // actual programmy part
+        turnTo(45);
+        goForward(3);
+
         while (opModeIsActive())  {
 
             // if the A and B buttons are pressed just now, reset Z heading.
@@ -115,7 +129,6 @@ public class GyroTesting extends LinearOpMode {
             telemetry.addData("4", "Z av. %03d", zVal);
             telemetry.update();
 
-            turnTo(45);
         }
     }
 }

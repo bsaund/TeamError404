@@ -1,15 +1,13 @@
-package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import static java.lang.Math.abs;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import static java.lang.Math.abs;
-
 /**
  * Created by jxfio_000 on 10/23/2016.
  */
-@Autonomous (name="Auto test", group="test")
+@Autonomous(name="Auto test", group="test")
 public class Autotest extends LinearOpMode {
     public void DriveFwdIn(double In){
         double a;
@@ -90,6 +88,6 @@ public class Autotest extends LinearOpMode {
         DriveFwdIn(24);
         TurnNDegrees(45);
         DriveFwdIn(96);
-
     }
 }
+
