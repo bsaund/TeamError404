@@ -35,15 +35,15 @@ public class Test extends LinearOpMode {
                     s3.setPower(-.5);
                     s1.setPower(.4);
                     sleep(1000);
-                    loader.setPosition(loader.MAX_POSITION);
+                    loader.setPosition((loader.MAX_POSITION-loader.MIN_POSITION)/2+loader.MAX_POSITION);
                     sleep(100);
                     s1.setPower(0);
                     s2.setPower(0);
                     s3.setPower(0);
-                    loader.setPosition((loader.MAX_POSITION-loader.MIN_POSITION)/2+loader.MIN_POSITION);
+                    loader.setPosition(loader.MIN_POSITION);
                 }
-                if (gamepad2.b=true){
-                    loader.setPosition((loader.MAX_POSITION-loader.MIN_POSITION)*3/4+loader.MIN_POSITION);
+                if (gamepad2.x=true){
+                    loader.setPosition((loader.MAX_POSITION-loader.MIN_POSITION)/4+loader.MIN_POSITION);
                 }
                 l.setPower(lc);
                 r.setPower(rc);
