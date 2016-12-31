@@ -1,46 +1,105 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorAdafruitIMU;
-
 /**
- * Created by jxfio_000 on 10/23/2016.
+ * Created by lillianellis on 12/1/16.
  */
-@Autonomous (name="Auto test", group="test")
+
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
+
+/*
+ * This is an example LinearOpMode that shows how to use
+ * the Modern Robotics Gyro.
+ *
+ * The op mode assumes that the gyro sensor
+ * is attached to a Device Interface Module I2C channel
+ * and is configured with a name of "gyro".
+ *
+ * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
+ * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
+*/
+@Autonomous(name = "the one", group = "Sensor")
 public class Autotest extends LinearOpMode {
-    DcMotor l;
-    DcMotor r;
-    DcMotor conveyor;
-    DcMotor shooter;
-    DcMotor la;//left arm
-    SensorAdafruitIMU gyro;
-    double lc; //left control
-    double rc; //right control
-    double cvbc; //conveyor control
-    double sc; // shooter control
-    public void runOpMode() throws InterruptedException {
-        l = hardwareMap.dcMotor.get("l");//setup LOL
-        r = hardwareMap.dcMotor.get("r");// Same LOL
-        conveyor = hardwareMap.dcMotor.get("cvb");//LOLOLOLOLOLOLOLOLOLOLOLOLOL
-        shooter = hardwareMap.dcMotor.get("s");//TROLOLOLOLALOLLALALLOL
-        la = hardwareMap.dcMotor.get("la");//such funny much wow
-        telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
-        telemetry.update();//same here1
-        waitForStart();
-        cvbc=1;
-        while(opModeIsActive()){
-            l.setPower(cvbc);
-            cvbc=-cvbc;
-            sleep(1500);
-            l.setPower(0);
-            sleep(1500);
+    DcMotor l;//left drive
+    DcMotor r;//right drive
+    ModernRoboticsI2cGyro gyro;   // Hardware Device Object
+    //turns to the angle given
+    public void turnTo(double angle) {
 
+        //Note: right motor is reversed
 
+        double currentAngle  = gyro.getIntegratedZValue();
+        while (currentAngle < angle) {
+            l.setPower(1);
+            r.setPower(1); //this is reversed!
+            currentAngle = gyro.getIntegratedZValue();
+        }
+        while (currentAngle > angle) {
+            l.setPower(-1);
+            r.setPower(-1); //again, reversed!
+            currentAngle = gyro.getIntegratedZValue();
+        }
+
+        l.setPower(0);
+        r.setPower(0);
+    }
+    // t is time robot goes for (for example if you make the robot go forward for 3 sec, turn 45 degrees, then go forward for 4 seconds the t variables would be 3 the first time and 4 the second time.
+    public void goForward(double t) {
+        double tZero;
+        tZero = getRuntime();//sets tZero as the time the function is called, so it can be seen as the inital time
+        while (getRuntime() - tZero < t) { //time- tZero means time the function has been running, so this means that while the time the function has been running is less than the desired time for the function to run, the robot will go forward.
+            l.setPower(1);
+            r.setPower(-1);//right motor reversed
 
         }
+        l.setPower(0);
+        r.setPower(0);
+
+
+    }
+
+
+
+
+    @Override
+    public void runOpMode() {
+        l = hardwareMap.dcMotor.get("l");//setup LOL
+        r = hardwareMap.dcMotor.get("r");// Same LOL
+        int xVal, yVal, zVal = 0;     // Gyro rate Values
+        int heading = 0;              // Gyro integrated heading
+        int angleZ = 0;
+        boolean lastResetState = false;
+        boolean curResetState  = false;
+
+        // get a reference to a Modern Robotics GyroSensor object.
+        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
+
+        // start calibrating the gyro.
+        telemetry.addData(">", "Gyro Calibrating. Do Not move!");
+        telemetry.update();
+        gyro.calibrate();
+
+        // make sure the gyro is calibrated.
+        while (!isStopRequested() && gyro.isCalibrating())  {
+            sleep(50);
+            idle();
+        }
+
+        telemetry.addData(">", "Gyro Calibrated.  Press Start.");
+        telemetry.update();
+
+        // wait for the start button to be pressed.
+        waitForStart();
+
+        goForward(2); // actual programmy part
+        turnTo(45);
+        goForward(3);
 
     }
 }
+

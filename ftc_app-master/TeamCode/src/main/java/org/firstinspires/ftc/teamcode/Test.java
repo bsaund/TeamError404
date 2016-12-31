@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -32,7 +33,7 @@ public class Test extends LinearOpMode {
                 cvbc = gamepad2.left_stick_y;
                 sc = gamepad2.right_stick_y;
                 ac = gamepad2.right_trigger - gamepad2.left_trigger;
-                la.setPower(ac);
+                la.setPower(ac*.125);
                 l.setPower(lc);
                 r.setPower(rc);
                 conveyor.setPower(cvbc);
