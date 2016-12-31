@@ -25,14 +25,14 @@ public class Autotest extends LinearOpMode {
         if(In>0){
             while(r.getCurrentPosition() - a < rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1-.1*Math.pow(2, (startangle-gyro.getHeading()))))*(1-2*(abs(5+tics-(rotations/2))/rotations)));
-                l.setPower((1/(1-.1*Math.pow(2,(gyro.getHeading()-startangle))))*(-(1-2*(abs(5+tics-(rotations/2))/rotations))));
+                r.setPower((1/(1-.1*Math.pow(2, (startangle-gyro.getHeading()))))*(((.98)/(rotations/2))*abs(tics-(rotations/2))+1));
+                l.setPower((1/(1-.1*Math.pow(2,(gyro.getHeading()-startangle))))*(-(((.98)/(rotations/2))*abs(tics-(rotations/2))+1)));
             }
         }else{
             while(r.getCurrentPosition() - a > rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1-.1*Math.pow(2, (startangle-gyro.getHeading()))))*(1-2*(abs(5+tics-(rotations/2))/rotations)));
-                l.setPower((1/(1-.1*Math.pow(2,(gyro.getHeading()-startangle))))*(-(1-2*(abs(5+tics-(rotations/2))/rotations))));
+                r.setPower((1/(1-.1*Math.pow(2, (startangle-gyro.getHeading()))))*((.98)/(rotations/2))*abs(tics-(rotations/2))+1);
+                l.setPower((1/(1-.1*Math.pow(2,(gyro.getHeading()-startangle))))*(-((.98)/(rotations/2))*abs(tics-(rotations/2))+1));
             }
         }
     }
@@ -41,13 +41,13 @@ public class Autotest extends LinearOpMode {
         startangle = gyro.getHeading();
         if(degrees>0){
             while(degrees < gyro.getHeading()){
-                r.setPower((1-2*(abs(1+(gyro.getHeading()-startangle)-(degrees/2))/degrees)));
-                l.setPower((1-2*(abs(1+(gyro.getHeading()-startangle)-(degrees/2))/degrees)));
+                r.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
+                l.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
             }
         }else{
             while(degrees > gyro.getHeading()){
-                r.setPower((1-2*(abs(1+(gyro.getHeading()-startangle)-(degrees/2))/degrees)));
-                l.setPower((1-2*(abs(1+(gyro.getHeading()-startangle)-(degrees/2))/degrees)));
+                r.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
+                l.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
             }
         }
     }
