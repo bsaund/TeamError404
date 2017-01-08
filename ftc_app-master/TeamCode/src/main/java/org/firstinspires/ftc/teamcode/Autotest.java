@@ -17,60 +17,49 @@ public class Autotest extends LinearOpMode {
         double tics;
         startangle = gyro.getHeading();
         a = r.getCurrentPosition();
-        circumference = 12.566370614359172953850573533118;
-        rotations = In/circumference;
-        rotations = rotations*1440;
+        rotations = In*57.295779513082320876798154814105;
         if(In>0){
             while(r.getCurrentPosition() - a < rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1-.1*Math.pow(2, (startangle-gyro.getHeading()))))*(((.98)/(rotations/2))*abs(tics-(rotations/2))+1));
-                l.setPower((1/(1-.1*Math.pow(2,(gyro.getHeading()-startangle))))*(-(((.98)/(rotations/2))*abs(tics-(rotations/2))+1)));
+                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*Math.abs((tics-rotations)/rotations))));
+                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*Math.abs((tics-rotations)/rotations))));
             }
         }else{
             while(r.getCurrentPosition() - a > rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1-.1*Math.pow(2, (startangle-gyro.getHeading()))))*((.98)/(rotations/2))*abs(tics-(rotations/2))+1);
-                l.setPower((1/(1-.1*Math.pow(2,(gyro.getHeading()-startangle))))*(-((.98)/(rotations/2))*abs(tics-(rotations/2))+1));
+                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*Math.abs((tics-rotations)/rotations))));
+                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*Math.abs((tics-rotations)/rotations))));
             }
         }
     }
     public void TurnNDegrees(double degrees){
         double startangle;
         startangle = gyro.getHeading();
+        degrees=degrees/2;
         if(degrees>0){
             while(degrees < gyro.getHeading()){
-                r.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
-                l.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
+                r.setPower(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees)));
+                l.setPower(-1*(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees))));
             }
         }else{
             while(degrees > gyro.getHeading()){
-                r.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
-                l.setPower((.98)/(degrees/2)*abs(gyro.getHeading()-(degrees/2))+1);
+                r.setPower(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees)));
+                l.setPower(-1*(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees))));
             }
         }
     }
     DcMotor l;
     DcMotor r;
-    DcMotor conveyor;
-    DcMotor shooter;
-    DcMotor la;//left arm
     ModernRoboticsI2cGyro gyro;
-    double lc; //left control
-    double rc; //right control
-    double cvbc; //conveyor control
-    double sc; // shooter control
     public void runOpMode() throws InterruptedException {
         gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
         l = hardwareMap.dcMotor.get("l");//setup LOL
         r = hardwareMap.dcMotor.get("r");// Same LOL
-        conveyor = hardwareMap.dcMotor.get("cvb");//LOLOLOLOLOLOLOLOLOLOLOLOLOL
-        shooter = hardwareMap.dcMotor.get("s");//TROLOLOLOLALOLLALALLOL
-        la = hardwareMap.dcMotor.get("la");//such funny much wow
         telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
         telemetry.update();//same here1
         r.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        telemetry.addData(">", "Gyro Calibrating. Do Not move!");
+        telemetry.addData(">", "Gyro Calibrating. Do Not move you orangutan!");
         telemetry.update();
         gyro.calibrate();
 
@@ -80,14 +69,25 @@ public class Autotest extends LinearOpMode {
             idle();
         }
 
-        telemetry.addData(">", "Gyro Calibrated.  Press Start.");
+        telemetry.addData(">", "Gyro Calibrated.  Press Start, only after you are told to do so.");
         telemetry.update();
 
         // wait for the start button to be pressed.
         waitForStart();
+        telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
+        telemetry.update();
         DriveFwdIn(24);
+        telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
+        telemetry.update();
         TurnNDegrees(45);
+        telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
+        telemetry.update();
         DriveFwdIn(96);
+        telemetry.addData(">", "Let's test your knowledge and see what you've learned so far! What colour are the unicorns?");
+        telemetry.update();
+        sleep(2000);
+        telemetry.addData(">", "Let's test your knowledge and see what you've learned so far! What colour are the unicorns?");
+        telemetry.update();
     }
 }
 

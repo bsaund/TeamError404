@@ -96,11 +96,11 @@ public class GyroTesting extends LinearOpMode {
 
         // wait for the start button to be pressed.
         waitForStart();
-
+/*
         goForward(2); // actual programmy part
         turnTo(45);
         goForward(3);
-
+*/
         while (opModeIsActive())  {
 
             // if the A and B buttons are pressed just now, reset Z heading.

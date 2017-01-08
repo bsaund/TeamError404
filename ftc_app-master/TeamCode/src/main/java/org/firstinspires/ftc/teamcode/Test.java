@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name= "Hopefuly working", group = "prayer circle")
@@ -17,6 +18,7 @@ public class Test extends LinearOpMode {
     Servo booper;
     double lc; //left control
     double rc; //right control
+    double a;
 
     public void runOpMode() throws InterruptedException {
         l = hardwareMap.dcMotor.get("l");//setup LOL
@@ -28,31 +30,43 @@ public class Test extends LinearOpMode {
         booper = hardwareMap.servo.get("boop");
         telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
         telemetry.update();//same here
+        a = 1;
         waitForStart();
         {
             while (opModeIsActive()) {
-                lc = gamepad1.left_stick_y;
+                lc = .4*gamepad1.left_stick_y;
                 rc = -gamepad1.right_stick_y;
                 if(gamepad2.right_bumper){
                     s2.setPower(.5);
                     s3.setPower(-.5);
                     s1.setPower(.4);
                     sleep(1000);
-                    loader.setPosition((loader.MAX_POSITION-loader.MIN_POSITION)/2+loader.MAX_POSITION);
-                    sleep(100);
+                    loader.setPosition(loader.MAX_POSITION/2);
+                    sleep(1000);
                     s1.setPower(0);
                     s2.setPower(0);
                     s3.setPower(0);
-                    loader.setPosition(loader.MIN_POSITION);
+                    loader.setPosition(loader.MAX_POSITION);
+                }
+                if(gamepad2.left_bumper){
+                    loader.setPosition(loader.MAX_POSITION/2);
+                    sleep(500);
+                    s1.setPower(-.2);
+                    sleep(500);
+                    s1.setPower(0);
+                    loader.setPosition((loader.MIN_POSITION-loader.MAX_POSITION)/7+loader.MAX_POSITION);
                 }
                 if (gamepad2.a){
-                    loader.setPosition((loader.MAX_POSITION-loader.MIN_POSITION)/4+loader.MIN_POSITION);
+                    loader.setPosition((loader.MIN_POSITION-loader.MAX_POSITION)/7+loader.MAX_POSITION);
+                }
+                if (gamepad2.x) {
+                    loader.setPosition(loader.MAX_POSITION);
                 }
                 if(gamepad2.y){
-                    booper.setPosition(booper.MAX_POSITION);
+                    booper.setPosition(booper.MIN_POSITION);
                 }
                 if(gamepad2.b){
-                    booper.setPosition(booper.MIN_POSITION);
+                    booper.setPosition(booper.MAX_POSITION);
                 }
                 l.setPower(lc);
                 r.setPower(rc);
