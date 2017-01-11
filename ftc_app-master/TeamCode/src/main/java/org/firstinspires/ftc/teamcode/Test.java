@@ -1,15 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
-@TeleOp(name= "Hopefuly working", group = "prayer circle")
+@TeleOp(name= "Hopefuly working😈😈😈", group = "prayer circle")
 public class Test extends LinearOpMode {
     DcMotor l;//left drive
     DcMotor r;//right drive
@@ -33,6 +30,7 @@ public class Test extends LinearOpMode {
         telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
         telemetry.update();//same here
         a = 1;
+        volts = hardwareMap.voltageSensor.get("");
         waitForStart();
         {
             while (opModeIsActive()) {
@@ -77,6 +75,7 @@ public class Test extends LinearOpMode {
                 l.setPower(lc);
                 r.setPower(rc);
                 telemetry.addData("test test 1-2-3-4", volts);
+                telemetry.update();
             }
         }
     }
