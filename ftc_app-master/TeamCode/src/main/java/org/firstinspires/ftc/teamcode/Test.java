@@ -5,7 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 @TeleOp(name= "Hopefuly working", group = "prayer circle")
 public class Test extends LinearOpMode {
@@ -16,10 +18,10 @@ public class Test extends LinearOpMode {
     DcMotor s3;//shooter 3
     Servo loader;//loader
     Servo booper;
+    VoltageSensor volts;
     double lc; //left control
     double rc; //right control
     double a;
-
     public void runOpMode() throws InterruptedException {
         l = hardwareMap.dcMotor.get("l");//setup LOL
         r = hardwareMap.dcMotor.get("r");// Same LOL
@@ -37,8 +39,8 @@ public class Test extends LinearOpMode {
                 lc = .4*gamepad1.left_stick_y;
                 rc = -gamepad1.right_stick_y;
                 if(gamepad2.right_bumper){
-                    s2.setPower(.5);
-                    s3.setPower(-.5);
+                    s2.setPower(.6);
+                    s3.setPower(-.6);
                     s1.setPower(.4);
                     sleep(1000);
                     loader.setPosition(loader.MAX_POSITION/2);
@@ -51,9 +53,13 @@ public class Test extends LinearOpMode {
                 if(gamepad2.left_bumper){
                     loader.setPosition(loader.MAX_POSITION/2);
                     sleep(500);
-                    s1.setPower(-.2);
-                    sleep(500);
+                    s2.setPower(-1);
+                    s3.setPower(1);
+                    s1.setPower(-.8);
+                    sleep(1000);
                     s1.setPower(0);
+                    s2.setPower(0);
+                    s3.setPower(0);
                     loader.setPosition((loader.MIN_POSITION-loader.MAX_POSITION)/7+loader.MAX_POSITION);
                 }
                 if (gamepad2.a){
@@ -70,6 +76,7 @@ public class Test extends LinearOpMode {
                 }
                 l.setPower(lc);
                 r.setPower(rc);
+                telemetry.addData("test test 1-2-3-4", volts);
             }
         }
     }

@@ -12,7 +12,6 @@ public class Autotest extends LinearOpMode {
     public void DriveFwdIn(double In){
         double a;
         double startangle;
-        double circumference;
         double rotations;
         double tics;
         startangle = gyro.getHeading();
@@ -21,14 +20,20 @@ public class Autotest extends LinearOpMode {
         if(In>0){
             while(r.getCurrentPosition() - a < rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*Math.abs((tics-rotations)/rotations))));
-                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*Math.abs((tics-rotations)/rotations))));
+                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.addData("right",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.addData("left",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.update();
             }
         }else{
             while(r.getCurrentPosition() - a > rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*Math.abs((tics-rotations)/rotations))));
-                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*Math.abs((tics-rotations)/rotations))));
+                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.addData("right",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.addData("left",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.update();
             }
         }
     }
@@ -53,6 +58,7 @@ public class Autotest extends LinearOpMode {
     ModernRoboticsI2cGyro gyro;
     public void runOpMode() throws InterruptedException {
         gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
+
         l = hardwareMap.dcMotor.get("l");//setup LOL
         r = hardwareMap.dcMotor.get("r");// Same LOL
         telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
