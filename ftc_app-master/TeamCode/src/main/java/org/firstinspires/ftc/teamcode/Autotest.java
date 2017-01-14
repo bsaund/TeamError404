@@ -68,7 +68,7 @@ public class Autotest extends LinearOpMode {
         telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
         telemetry.update();//same here1
         r.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        l.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         telemetry.addData(">", "Gyro Calibrating. Do Not move you orangutan!");
         telemetry.update();
         gyro.calibrate();
@@ -92,7 +92,7 @@ public class Autotest extends LinearOpMode {
         TurnNDegrees(-45);
         telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
         telemetry.update();
-        DriveFwdIn(60);
+        DriveFwdIn(-60);
         telemetry.addData(">", "Let's test your knowledge and see what you've learned so far! What colour are the unicorns?");
         telemetry.update();
         sleep(2000);
