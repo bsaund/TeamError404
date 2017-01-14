@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+
 @TeleOp(name= "Hopefuly working😈😈😈", group = "prayer circle")
 public class Test extends LinearOpMode {
     DcMotor l;//left drive
@@ -15,21 +16,14 @@ public class Test extends LinearOpMode {
     DcMotor s3;//shooter 3
     Servo loader;//loader
     Servo booper;
+    VoltageSensor volt1;
+    VoltageSensor volt2;
+    VoltageSensor volt3;
     double volts;
     double lc; //left control
     double rc; //right control
     double a;
     public void runOpMode() throws InterruptedException {
-        double getBatteryVoltage() {
-            double result = Double.POSITIVE_INFINITY;
-            for (VoltageSensor sensor : hardwareMap.voltageSensor) {
-                double voltage = sensor.getVoltage();
-                if (voltage > 0) {
-                    result = Math.min(result, voltage);
-                }
-            }
-            return result;
-        }
         l = hardwareMap.dcMotor.get("l");//setup LOL
         r = hardwareMap.dcMotor.get("r");// Same LOL
         s1 = hardwareMap.dcMotor.get("s1");//LOLOLOLOLOLOLOLOLOLOLOLOLOL
@@ -40,7 +34,8 @@ public class Test extends LinearOpMode {
         telemetry.addData("", "YOU ARE A NERD!!!!!");//LOL--FYI- this does nothing
         telemetry.update();//same here
         a = 1;
-        volts = getBatteryVoltage();
+        volt1 = hardwareMap.voltageSensor.get("rolly");
+        volt2 = hardwareMap.voltageSensor.get("");
         waitForStart();
         {
             while (opModeIsActive()) {
@@ -84,7 +79,8 @@ public class Test extends LinearOpMode {
                 }
                 l.setPower(lc);
                 r.setPower(rc);
-                telemetry.addData("test test 1-2-3-4", volts);
+                volts= (volt1.getVoltage()+ volt2.getVoltage()+ volt3.getVoltage())/3;
+                telemetry.addData("lol", volts);
                 telemetry.update();
             }
         }

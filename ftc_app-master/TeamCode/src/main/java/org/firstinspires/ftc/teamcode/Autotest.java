@@ -20,8 +20,8 @@ public class Autotest extends LinearOpMode {
         if(In>0){
             while(r.getCurrentPosition() - a < rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
-                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*abs((tics-rotations)/rotations))));
+                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.8*Math.pow(((tics-rotations)/rotations),2))));
+                l.setPower(-(1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.8*Math.pow(((tics-rotations)/rotations),2))));
                 telemetry.addData("right",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
                 telemetry.addData("left",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
                 telemetry.update();
@@ -29,27 +29,31 @@ public class Autotest extends LinearOpMode {
         }else{
             while(r.getCurrentPosition() - a > rotations){
                 tics = r.getCurrentPosition() - a;
-                r.setPower((1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
-                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.9*abs((tics-rotations)/rotations))));
-                telemetry.addData("right",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
-                telemetry.addData("left",(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                r.setPower(-(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.8*Math.pow(((tics-rotations)/rotations),2))));
+                l.setPower((1/(1+.1*Math.pow(2,startangle-gyro.getHeading())))*(1-(.8*Math.pow(((tics-rotations)/rotations),2))));
+                telemetry.addData("right",-(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
+                telemetry.addData("left",-(1/(1+.1*Math.pow(2,gyro.getHeading()-startangle)))*(1-(.9*abs((tics-rotations)/rotations))));
                 telemetry.update();
             }
         }
     }
     public void TurnNDegrees(double degrees){
         double startangle;
+        double theta;
         startangle = gyro.getHeading();
-        degrees=degrees/2;
-        if(degrees>0){
-            while(degrees < gyro.getHeading()){
-                r.setPower(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees)));
-                l.setPower(-1*(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees))));
-            }
-        }else{
-            while(degrees > gyro.getHeading()){
-                r.setPower(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees)));
-                l.setPower(-1*(1-(.9*Math.abs((gyro.getHeading()-degrees)/degrees))));
+        while(abs(gyro.getHeading()-degrees)<.1) {
+            if (degrees > 0) {
+                while (gyro.getHeading() < degrees) {
+                    theta = gyro.getHeading();
+                    r.setPower(-(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                    l.setPower(-(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                }
+            } else {
+                while (gyro.getHeading() > degrees) {
+                    theta = gyro.getHeading();
+                    r.setPower((1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                    l.setPower((1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                }
             }
         }
     }
@@ -82,17 +86,17 @@ public class Autotest extends LinearOpMode {
         waitForStart();
         telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
         telemetry.update();
-        DriveFwdIn(24);
+        DriveFwdIn(-6.25);
         telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
         telemetry.update();
-        TurnNDegrees(45);
+        TurnNDegrees(-45);
         telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
         telemetry.update();
-        DriveFwdIn(96);
+        DriveFwdIn(60);
         telemetry.addData(">", "Let's test your knowledge and see what you've learned so far! What colour are the unicorns?");
         telemetry.update();
         sleep(2000);
-        telemetry.addData(">", "Let's test your knowledge and see what you've learned so far! What colour are the unicorns?");
+        telemetry.addData(">", "PINK!");
         telemetry.update();
     }
 }
