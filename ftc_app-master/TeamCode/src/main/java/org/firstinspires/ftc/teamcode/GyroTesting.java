@@ -35,17 +35,16 @@ public class GyroTesting extends LinearOpMode {
         //Note: right motor is reversed
 
         double currentAngle  = gyro.getIntegratedZValue();
-         while (currentAngle < angle) {
-             l.setPower(1);
-             r.setPower(1); //this is reversed!
-             currentAngle = gyro.getIntegratedZValue();
-         }
-        while (currentAngle > angle) {
-            l.setPower(-1);
-            r.setPower(-1); //again, reversed!
-            currentAngle = gyro.getIntegratedZValue();
+        while (currentAngle < angle) {
+                l.setPower(1);
+                r.setPower(1); //this is reversed!
+                currentAngle = gyro.getIntegratedZValue();
         }
-
+        while (currentAngle > angle) {
+                l.setPower(-1);
+                r.setPower(-1); //again, reversed!
+                currentAngle = gyro.getIntegratedZValue();
+        }
         l.setPower(0);
         r.setPower(0);
     }

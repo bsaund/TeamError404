@@ -44,15 +44,15 @@ public class Autotest extends LinearOpMode {
         while(abs(gyro.getHeading()-degrees)<.1) {
             if (degrees > 0) {
                 while (gyro.getHeading() < degrees) {
-                    theta = gyro.getHeading();
-                    r.setPower(-(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
-                    l.setPower(-(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                    theta = gyro.getHeading()-startangle;
+                    r.setPower((1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                    l.setPower((1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
                 }
             } else {
                 while (gyro.getHeading() > degrees) {
-                    theta = gyro.getHeading();
-                    r.setPower((1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
-                    l.setPower((1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                    theta = gyro.getHeading()-startangle;
+                    r.setPower(-(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
+                    l.setPower(-(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2))));
                 }
             }
         }
