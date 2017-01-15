@@ -35,7 +35,6 @@ public class Test extends LinearOpMode {
         telemetry.update();//same here
         a = 1;
         volt1 = hardwareMap.voltageSensor.get("rolly");
-        volt2 = hardwareMap.voltageSensor.get("");
         waitForStart();
         {
             while (opModeIsActive()) {
@@ -79,7 +78,7 @@ public class Test extends LinearOpMode {
                 }
                 l.setPower(lc);
                 r.setPower(rc);
-                volts= (volt1.getVoltage()+ volt2.getVoltage()+ volt3.getVoltage())/3;
+                volts= volt1.getVoltage();
                 telemetry.addData("lol", volts);
                 telemetry.update();
             }
