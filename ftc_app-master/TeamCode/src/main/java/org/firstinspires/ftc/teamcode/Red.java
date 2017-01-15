@@ -13,6 +13,19 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 @Autonomous(name="red", group="test")
 public class Red extends LinearOpMode {
+    public void FIRE(){
+
+        s2.setPower(.6);
+        s3.setPower(-.6);
+        s1.setPower(.4);
+        sleep(1000);
+        loader.setPosition(loader.MAX_POSITION/2);
+        sleep(1000);
+        s1.setPower(0);
+        s2.setPower(0);
+        s3.setPower(0);
+        loader.setPosition(loader.MAX_POSITION);
+    }
     public void DriveFwdIn(double In) {
         double a;
         double startangle;
@@ -26,17 +39,22 @@ public class Red extends LinearOpMode {
         tics = 0;
         while (abs(tics - rotations) > 10) {
             tics = r.getCurrentPosition() - a;
-            pwrLeft = -.5*(1 / (1 + .1 * Math.pow(2, gyro.getIntegratedZValue() - startangle))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
-            pwrRight = .5*(1 / (1 + .1 * Math.pow(2, startangle- gyro.getIntegratedZValue()))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
+            double errorangle = gyro.getIntegratedZValue()- startangle;
+            //pwrLeft = -(1 / (1 + Math.pow(2, .1*(errorangle)))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
+            //pwrRight = (1 / (1 + Math.pow(2, -.1*(errorangle)))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
+            pwrLeft =  -1;
+            pwrRight = 1;
             if (tics > rotations) {
-                pwrRight = -pwrRight;
-                pwrLeft = -pwrLeft;
+                double tempPwrRight = pwrRight;
+                pwrRight = pwrLeft;
+                pwrLeft = tempPwrRight;
             }
             l.setPower(pwrLeft);
             r.setPower(pwrRight);
             telemetry.addData("driving", r.getCurrentPosition());
             telemetry.addData("Left", pwrLeft);
             telemetry.addData("Right", pwrRight);
+            telemetry.addData("angle", errorangle);
             telemetry.update();
         }
         r.setPower(0);
@@ -102,29 +120,12 @@ public class Red extends LinearOpMode {
 
         // wait for the start button to be pressed.
         waitForStart();
-        telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
-        telemetry.update();
         DriveFwdIn(-6.25);
-        telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
-        telemetry.update();
+        sleep(1000);
         TurnNDegrees(-45);
-        telemetry.addData(">", "pink fluffy unicorns dancing on rainbows");
-        telemetry.update();
-        s2.setPower(.6);
-        s3.setPower(-.6);
-        s1.setPower(.4);
         sleep(1000);
-        loader.setPosition(loader.MAX_POSITION/2);
+        FIRE();
         sleep(1000);
-        s1.setPower(0);
-        s2.setPower(0);
-        s3.setPower(0);
-        loader.setPosition(loader.MAX_POSITION);
-        DriveFwdIn(-50);
-        telemetry.addData(">", "Let's test your knowledge and see what you've learned so far! What colour are the unicorns?");
-        telemetry.update();
-        sleep(2000);
-        telemetry.addData(">", "PINK!");
-        telemetry.update();
+        DriveFwdIn(-90);
     }
 }
