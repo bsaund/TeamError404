@@ -34,6 +34,8 @@ public class Red extends LinearOpMode {
             }
             l.setPower(pwrLeft);
             r.setPower(pwrRight);
+            telemetry.addData("driving", r.getCurrentPosition());
+            telemetry.update();
         }
         r.setPower(0);
         l.setPower(0);
@@ -57,9 +59,7 @@ public class Red extends LinearOpMode {
             }
             r.setPower(turn_rate);
             l.setPower(turn_rate);// not negative b/c left motor reversed
-            telemetry.addData("turn rate:", turn_rate);
-            telemetry.addData("Gyro heading:", gyro.getIntegratedZValue());
-            telemetry.addData("goal_angle", goal_angle);
+            telemetry.addData("turning", gyro.getIntegratedZValue());
             telemetry.update();
         }
         r.setPower(0);
