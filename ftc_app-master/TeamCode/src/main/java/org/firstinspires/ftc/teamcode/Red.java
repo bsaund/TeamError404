@@ -26,8 +26,8 @@ public class Red extends LinearOpMode {
         tics = 0;
         while (abs(tics - rotations) > 10) {
             tics = r.getCurrentPosition() - a;
-            pwrLeft = -1*(1 / (1 + .1 * Math.pow(2, gyro.getIntegratedZValue() - startangle))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
-            pwrRight = (1 / (1 + .1 * Math.pow(2, startangle- gyro.getIntegratedZValue()))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
+            pwrLeft = -.5*(1 / (1 + .1 * Math.pow(2, gyro.getIntegratedZValue() - startangle))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
+            pwrRight = .5*(1 / (1 + .1 * Math.pow(2, startangle- gyro.getIntegratedZValue()))) * (1 - (.8 * Math.pow(((tics - rotations) / rotations), 2)));
             if (tics > rotations) {
                 pwrRight = -pwrRight;
                 pwrLeft = -pwrLeft;
@@ -35,6 +35,8 @@ public class Red extends LinearOpMode {
             l.setPower(pwrLeft);
             r.setPower(pwrRight);
             telemetry.addData("driving", r.getCurrentPosition());
+            telemetry.addData("Left", pwrLeft);
+            telemetry.addData("Right", pwrRight);
             telemetry.update();
         }
         r.setPower(0);
@@ -53,13 +55,14 @@ public class Red extends LinearOpMode {
 
         while (abs(gyro.getIntegratedZValue() - goal_angle) > 2) {
             theta = gyro.getHeading()-startangle;
-            double turn_rate = -(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2)));
+            double turn_rate = -.5*(1 - (.8 * Math.pow(((theta - degrees) / degrees), 2)));
             if (gyro.getIntegratedZValue() > goal_angle){
                     turn_rate = -turn_rate;
             }
             r.setPower(turn_rate);
             l.setPower(turn_rate);// not negative b/c left motor reversed
-            telemetry.addData("turning", gyro.getIntegratedZValue());
+            telemetry.addData("turning, current angle", gyro.getIntegratedZValue()-startangle);
+            telemetry.addData("degrees",degrees);
             telemetry.update();
         }
         r.setPower(0);
