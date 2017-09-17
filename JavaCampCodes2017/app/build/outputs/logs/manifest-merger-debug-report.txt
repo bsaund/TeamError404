@@ -1,0 +1,73 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:2:1-21:12
+	package
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:3:5-57
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+application
+ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support:appcompat-v7:25.0.1] /Users/lillianellis/.android/build-cache/37f38be28133dfaf65ed60f61b683a73eb59cd7f/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.0.1] /Users/lillianellis/.android/build-cache/fdc1d2a43f899c78d833b7e836f7f2073a577418/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.0.1] /Users/lillianellis/.android/build-cache/a8d1ab1a117dec44c7215a1534f4e4df0eb01449/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.0.1] /Users/lillianellis/.android/build-cache/d5e8501824fdcdb126c181108a28a80c37387fda/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.0.1] /Users/lillianellis/.android/build-cache/46d5a0a3a63910755dfa2aac707b007c1806cd4c/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.0.1] /Users/lillianellis/.android/build-cache/8c0fa83f5296b76c5095a47957c1686978298aa1/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] /Users/lillianellis/.android/build-cache/fc7d4230d710d06d0ba3a47c6e21ad346136249f/output/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.0.1] /Users/lillianellis/.android/build-cache/37cbf363405569f8a9880993257970cf3d96441a/output/AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:25.0.1] /Users/lillianellis/.android/build-cache/eb4a917279ca7753fdc0304215c7c30ad2579057/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/lillianellis/.android/build-cache/3fb09fced013449171b44f8e99142e1ec5c78229/output/AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:8:9-41
+	android:supportsRtl
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:9:9-54
+	android:allowBackup
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:6:9-35
+	android:icon
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:7:9-43
+	android:theme
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.lillianellis.javacampcodes2017.MainActivity
+ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:12:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.0.1] /Users/lillianellis/.android/build-cache/37f38be28133dfaf65ed60f61b683a73eb59cd7f/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.0.1] /Users/lillianellis/.android/build-cache/fdc1d2a43f899c78d833b7e836f7f2073a577418/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.0.1] /Users/lillianellis/.android/build-cache/a8d1ab1a117dec44c7215a1534f4e4df0eb01449/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.0.1] /Users/lillianellis/.android/build-cache/d5e8501824fdcdb126c181108a28a80c37387fda/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.0.1] /Users/lillianellis/.android/build-cache/46d5a0a3a63910755dfa2aac707b007c1806cd4c/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.0.1] /Users/lillianellis/.android/build-cache/8c0fa83f5296b76c5095a47957c1686978298aa1/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] /Users/lillianellis/.android/build-cache/fc7d4230d710d06d0ba3a47c6e21ad346136249f/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.0.1] /Users/lillianellis/.android/build-cache/37cbf363405569f8a9880993257970cf3d96441a/output/AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:25.0.1] /Users/lillianellis/.android/build-cache/eb4a917279ca7753fdc0304215c7c30ad2579057/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/lillianellis/.android/build-cache/3fb09fced013449171b44f8e99142e1ec5c78229/output/AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.0.1] /Users/lillianellis/.android/build-cache/37f38be28133dfaf65ed60f61b683a73eb59cd7f/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lillianellis/TeamError404/JavaCampCodes2017/app/src/main/AndroidManifest.xml
