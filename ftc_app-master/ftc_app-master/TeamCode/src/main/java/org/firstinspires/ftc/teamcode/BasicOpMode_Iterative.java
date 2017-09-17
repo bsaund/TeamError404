@@ -51,17 +51,34 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="Basic: Iterative OpMode", group="Iterative Opmode")
-@Disabled
-public class BasicOpMode_Iterative extends OpMode
+//@Disabled
+public class BaseTest extends OpMode
 {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
-
+    private DcMotor DriveA = null;
+    private DcMotor DriveB = null;
+    private DcMotor DriveC = null;
+    IntegratingGyroscope gyro;
+    ModernRoboticsI2cGyro modernRoboticsI2cGyro;
     /*
      * Code to run ONCE when the driver hits INIT
      */
+    timer.reset();
+    while (!isStopRequested() && modernRoboticsI2cGyro.isCalibrating())  {
+    telemetry.addData("calibrating", "%s", Math.round(timer.seconds())%2==0 ? "|.." : "..|");
+    telemetry.update();
+    sleep(50);
+}
+
+    telemetry.log().clear(); telemetry.log().add("Gyro Calibrated. Press Start.");
+    telemetry.clear(); telemetry.update();
+
+    // Wait for the start button to be pressed
+    waitForStart();
+    telemetry.log().clear();
+    telemetry.log().add("Press A & B to reset heading");
+
     @Override
     public void init() {
         telemetry.addData("Status", "Initializing");
@@ -71,8 +88,8 @@ public class BasicOpMode_Iterative extends OpMode
         // step (using the FTC Robot Controller app on the phone).
         DriveA = hardwareMap.get(DcMotor.class, "DriveA");
         DriveB = hardwareMap.get(DcMotor.class, "DriveB");
-        DriveC = hardwareMap.get(DcMotor.class, "DriveC")
-
+        DriveC = hardwareMap.get(DcMotor.class, "DriveC");
+        gyro = hardwareMap.get();
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
     }
